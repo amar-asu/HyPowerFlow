@@ -1,0 +1,2 @@
+lips-benchmark==0.2.6
+torch-geometric==2.5.0
