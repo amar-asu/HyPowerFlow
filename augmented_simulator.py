@@ -1,12 +1,27 @@
-# Copyright (c) 2024 Amarsagar Reddy Ramapuram Matavalam and Shaban Satti , Arizona State University
-# 
-# Licensed under the creative commons Attribution-NonCommercial-NoDerivatives 4.0 International license
-# You may obtain a copy of the License at
-#
-#     https://creativecommons.org/licenses/by-nc-nd/4.0/
-#
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+"""
+Copyright (c) 2025,
+See authors.txt
 
+This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 
+International License. To view a copy of this license, visit:
+
+    https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+You are free to share this work (copy and redistribute it in any medium or format) 
+under the following terms:
+- Attribution: You must give appropriate credit, provide a link to the license, 
+  and indicate if changes were made.
+- NonCommercial: You may not use the material for commercial purposes.
+- NoDerivatives: If you remix, transform, or build upon the material, 
+  you may not distribute the modified material.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
+PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE 
+FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR 
+OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+DEALINGS IN THE SOFTWARE.
+"""
 
 import numpy as np
 import torch
@@ -132,10 +147,11 @@ class TorchSimulator(AugmentedSimulator):
 
     def train(self, train_dataset, val_dataset = None, **kwargs):
         
-        in_data, target, train_loader = process_dataset(dataset = train_dataset,\
-                                                          batch_size=100000, training=True, shuffle=False)
-        train_losses = []
         params = kwargs
+        
+        in_data, target, train_loader = process_dataset(dataset = train_dataset,\
+                                                          batch_size=params["train_batch_size"], training=True, shuffle=False)
+        train_losses = []
         
         optimizer = optim.Adam(self.model_theta.parameters(), lr=params["lr"], weight_decay=5e-4)
         loss_function = nn.MSELoss()
@@ -166,7 +182,7 @@ class TorchSimulator(AugmentedSimulator):
             print(f"Train Epoch: {epoch}   Avg_Loss: {mean_loss:.5f}")
             train_losses.append(mean_loss)
             
-        self.predict(val_dataset, eval_batch_size=100000) 
+        self.predict(val_dataset, eval_batch_size=params["eval_batch_size"]) 
         print("warm_up, done")
         return train_losses
         
@@ -184,7 +200,7 @@ class TorchSimulator(AugmentedSimulator):
         data, YBus_flat, Islanded_buses, data_loader =\
                   process_dataset(dataset, bus_enable_flag = self.bus_enable_flag, topo_vect_unique = self.topo_vect_unique,\
                                    PQ_unique = self.PQ_unique, PV_unique = self.PV_unique, device = self.device, \
-                                   batch_size = 100000, training = False, shuffle = False)
+                                   batch_size = eval_batch_size, training = False, shuffle = shuffle)
                 
 
         prod_p, prod_v, load_p, load_q, topo_vect,\

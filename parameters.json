@@ -1,6 +1,7 @@
 {
     "evaluateonly": 0,
     "scoringonly": 0,
+    "data_download": 0, 
     "simulator_config": {
       "simulator_type": "advanced",
       "simulator_file": "augmented_simulator",
@@ -10567,6 +10568,9 @@
       "epochs": 2000,
       "train_batch_size": 100000,
       "lr": 5e-4
-    }
+    },
+    "evaluation_config": {
+        "eval_batch_size": 100000
+        }
   }
   
