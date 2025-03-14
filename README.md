@@ -1,5 +1,5 @@
 # HyPowerFlow
-HyPowerFlow is the winning solution to the ML4PhySim Competetion to compute the line flows in the power grid at an operating point with minimal inference time. The steps to execute the code are : 
+HyPowerFlow is the winning solution to the ML4PhySim Competetion (https://www.codabench.org/competitions/2378/) to compute the line flows in the power grid at an operating point with minimal inference time. The steps to execute the code are : 
 1. Clone the GitHub repository: `git clone https://github.com/IRT-SystemX/ml4physim_startingkit_powergrid.git`
 2. Install the Python dependencies: `pip install -r requirements.txt`
 3. Run `python main.py `
