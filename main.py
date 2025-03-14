@@ -1,6 +1,8 @@
 """
 Copyright (c) 2025,
-See authors.txt
+
+Dr. Amarsagar Matavalam, Arizona State University (amar.sagar@asu.edu)
+Shaban Ghias Satti, Arizona State University (ishabansatti@gmail.com)
 
 This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 
 International License. To view a copy of this license, visit:
