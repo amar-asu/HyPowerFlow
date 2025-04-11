@@ -96,7 +96,7 @@ torch_simulator = TorchSimulator(benchmark, config, StandardScaler, device, base
 
 
 
-_ = torch_simulator.train(benchmark.train_dataset, benchmark.val_dataset, lr = lr, epochs = epochs)
+_ = torch_simulator.train(benchmark.train_dataset, benchmark.val_dataset, lr = lr, epochs = epochs, train_batch_size = train_batch_size,  eval_batch_size = eval_batch_size)
 
 metrics_test = evaluate_model(benchmark, model = torch_simulator, dataset_type = 'test', batch_size = eval_batch_size)
 pprint(metrics_test)

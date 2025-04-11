@@ -291,7 +291,11 @@ def process_dataset(dataset, bus_enable_flag = None, topo_vect_unique = None, PQ
         train_dataset  = LIPSDataset(dataset, device)
         in_data, out_data = train_dataset.get_training_data()
         samples = np.arange(dataset.size)
-        train_loader = np.array_split(samples, dataset.size // batch_size)
+        try:
+            train_loader = np.array_split(samples, dataset.size // batch_size)
+        except ValueError:
+            print("Error: Batch size is greater than data size.")
+            exit()
 
         return in_data, out_data, train_loader
     else:

@@ -20,6 +20,14 @@ pip install -r requirements.txt
 ```
 - set data_download paramter in paramters.json (1 to download the data and 0 to avoid downloading)
 - set train_batch_size and eval_batch_size in paramters.json as desired.
+- Following variables are dataset specific and must be set before run.
+ - base_volt (base voltages for buses)
+ - topo_vect_unique (unique topologies in the dataset)
+ - Ybus_sparse_const (Base admittance matrix with no outages)
+ - PQ_unique (PQ vector for each topo_vect_unique)
+ - PV_unique (PV vector for each topo_vect_unique)
+ - bus_enable_flag
+ - bus_renumber
 - run main.py
 
 ## License
