@@ -55,7 +55,7 @@ if(data_download == 1):
 BENCH_CONFIG_PATH = os.path.join("configs", "benchmarks", "lips_idf_2023.ini")
 DATA_PATH = os.path.join("input_data_local", "lips_idf_2023")
 LOG_PATH = "lips_idf_2023_log.log"
-SIM_CONFIG_PATH  = "config.ini"
+SIM_CONFIG_PATH  = os.path.join("configs", "benchmarks", "config.ini")
 
 
 sim_config_name = "DEFAULT"
