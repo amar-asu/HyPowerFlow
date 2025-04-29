@@ -291,18 +291,18 @@ def process_dataset(dataset, bus_enable_flag = None, topo_vect_unique = None, PQ
         train_dataset  = LIPSDataset(dataset, device)
         in_data, out_data = train_dataset.get_training_data()
         samples = np.arange(dataset.size)
-        try:
-            train_loader = np.array_split(samples, dataset.size // batch_size)
-        except ValueError:
-            print("Error: Batch size is greater than data size.")
-            exit()
-
+        if batch_size > dataset.size:
+            batch_size =  dataset.size
+        train_loader = np.array_split(samples, dataset.size // batch_size)
+        
         return in_data, out_data, train_loader
     else:
         inf_dataset  = LIPSDataset(dataset, bus_enable_flag, topo_vect_unique, PQ_unique, PV_unique, None, device)
         data            = inf_dataset.data_variables()
         YBus            = inf_dataset.get_reduced_Ybus_flattened_BATCH_enabled_124_buses()
         Islanded_buses  = inf_dataset.get_bus_islanded_flag_BATCH_124()
+        if batch_size > dataset.size:
+            batch_size =  dataset.size
         samples = np.arange(dataset.size)
         inf_loader = np.array_split(samples, dataset.size // batch_size)
 
